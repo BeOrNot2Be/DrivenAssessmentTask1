@@ -1,0 +1,42 @@
+/** @format */
+
+import React from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import TextField from "@material-ui/core/TextField";
+import { setBoardN } from "../actions/Checkerboard";
+
+const InputBox = ({ setBoardN }) => {
+  const handleChange = (event) => {
+    const value = parseInt(event.target.value);
+    if (Number.isNaN(value)) {
+      return;
+    } else {
+      setBoardN(value);
+      return;
+    }
+  };
+
+  return (
+    <TextField
+      style={{ margin: "10px" }}
+      id="outlined-search"
+      name="tags"
+      onChange={handleChange}
+      label="board N size:"
+      type="number"
+      variant="outlined"
+      fullWidth
+    />
+  );
+};
+
+InputBox.propTypes = {
+  setBoardN: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  setBoardN: setBoardN(dispatch),
+});
+
+export default connect(null, mapDispatchToProps)(InputBox);
